@@ -16,6 +16,15 @@ English | [简体中文](../README.md) | [繁體中文](README_CHT.md)
 
 </div>
 
+## 💖 Sponsors
+
+<div align="center">
+  <a href="https://serpapi.com/baidu-search-api?utm_source=github_daily_stock_analysis" target="_blank">
+    <img src="../sources/serpapi_banner_en.png" alt="Easily scrape real-time financial news data from search engines - SerpApi" height="160">
+  </a>
+</div>
+<br>
+
 ## ✨ Key Features
 
 ### 🎯 Core Capabilities
@@ -92,7 +101,7 @@ Go to your forked repo → `Settings` → `Secrets and variables` → `Actions` 
 |------------|------|:----:|
 | `STOCK_LIST` | Watchlist codes, e.g., `600519,AAPL,hk00700` | ✅ |
 | `TAVILY_API_KEYS` | [Tavily](https://tavily.com/) Search API (for news) | Recommended |
-| `SERPAPI_API_KEYS` | [SerpAPI](https://serpapi.com/) Backup search | Optional |
+| `SERPAPI_API_KEYS` | [SerpAPI](https://serpapi.com/baidu-search-api?utm_source=github_daily_stock_analysis) Backup search | Optional |
 | `TUSHARE_TOKEN` | [Tushare Pro](https://tushare.pro/) Token | Optional |
 
 **Stock Code Format**
