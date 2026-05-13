@@ -347,6 +347,14 @@ jobs:
           ANALYSIS_DELAY: ${{ vars.ANALYSIS_DELAY || secrets.ANALYSIS_DELAY || '0' }}
           TRADING_DAY_CHECK_ENABLED: ${{ vars.TRADING_DAY_CHECK_ENABLED || secrets.TRADING_DAY_CHECK_ENABLED || 'true' }}
           
+          AGENT_MODE: ${{ vars.AGENT_MODE || secrets.AGENT_MODE || 'true' }}
+          AGENT_SKILLS: ${{ vars.AGENT_SKILLS || secrets.AGENT_SKILLS || 'bull_trend,ma_golden_cross,shrink_pullback' }}
+          AGENT_MAX_STEPS: ${{ vars.AGENT_MAX_STEPS || secrets.AGENT_MAX_STEPS || '10' }}
+          AGENT_ARCH: ${{ vars.AGENT_ARCH || secrets.AGENT_ARCH || 'single' }}
+          AGENT_ORCHESTRATOR_MODE: ${{ vars.AGENT_ORCHESTRATOR_MODE || secrets.AGENT_ORCHESTRATOR_MODE || 'standard' }}
+          AGENT_RISK_OVERRIDE: ${{ vars.AGENT_RISK_OVERRIDE || secrets.AGENT_RISK_OVERRIDE || 'true' }}
+          AGENT_SKILL_ROUTING: ${{ vars.AGENT_SKILL_ROUTING || secrets.AGENT_SKILL_ROUTING || 'auto' }}
+          AGENT_SKILL_AUTOWEIGHT: ${{ vars.AGENT_SKILL_AUTOWEIGHT || secrets.AGENT_SKILL_AUTOWEIGHT || 'true' }}
           # ==========================================
           # 系统配置
           # ==========================================
