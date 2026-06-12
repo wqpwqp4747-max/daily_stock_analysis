@@ -13,6 +13,9 @@ required_tools:
 aliases: [成长, 成长股, 成长质量]
 default_priority: 55
 market_regimes: [trending_up]
+default_active: true
+default_router: true
+default_priority: 20
 
 instructions: |
   **成长质量策略（Growth Quality Strategy）**
