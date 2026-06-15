@@ -464,6 +464,9 @@ def _handle_get_stock_info(stock_code: str) -> dict:
 
     compact_context = _compact_fundamental_context(fundamental_context)
     valuation = compact_context.get("valuation", {}).get("data", {})
+    earnings = compact_context.get("earnings", {}).get("data", {})
+    financial_report = earnings.get("financial_report", {})
+    dividend = earnings.get("dividend", {})
     sector_rankings = compact_context.get("boards", {}).get("data", {})
     belong_boards = manager.get_belong_boards(stock_code)
 
@@ -480,6 +483,14 @@ def _handle_get_stock_info(stock_code: str) -> dict:
         "pb_ratio": valuation.get("pb_ratio"),
         "total_mv": valuation.get("total_mv"),
         "circ_mv": valuation.get("circ_mv"),
+        "financial_report": financial_report if isinstance(financial_report, dict) else {},
+        "dividend": dividend if isinstance(dividend, dict) else {},
+        "fundamental_data_quality": {
+            "context_status": compact_context.get("status"),
+            "earnings_status": compact_context.get("earnings", {}).get("status"),
+            "has_financial_report": bool(financial_report),
+            "has_dividend": bool(dividend),
+        },
         "fundamental_context": compact_context,
         "belong_boards": belong_boards,
         # Compatibility alias for existing callers; prefer belong_boards.
@@ -492,8 +503,10 @@ def _handle_get_stock_info(stock_code: str) -> dict:
 get_stock_info_tool = ToolDefinition(
     name="get_stock_info",
     description="Get stock fundamental information: valuation, growth, earnings, institution flow, "
-                "stock sector membership (belong_boards; boards is compatibility alias) and "
-                "sector rankings. Returns a compact fundamental_context to reduce token usage.",
+                "financial_report, dividend, stock sector membership "
+                "(belong_boards; boards is compatibility alias) and sector rankings. "
+                "Returns top-level financial_report/dividend plus compact fundamental_context "
+                "to reduce token usage.",
     parameters=[
         ToolParameter(
             name="stock_code",
