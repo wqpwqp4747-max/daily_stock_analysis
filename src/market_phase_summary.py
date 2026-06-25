@@ -34,6 +34,8 @@ _SENSITIVE_MARKERS = (
     "webhook",
 )
 _INTRADAY_BUCKET_PHASES = {"intraday", "lunch_break", "closing_auction"}
+_SUPPORTED_MANUAL_ANALYSIS_PHASES = {"premarket", "intraday", "postmarket"}
+_SUPPORTED_ANALYSIS_INTENTS = {"auto", *_SUPPORTED_MANUAL_ANALYSIS_PHASES}
 _PUBLIC_SOURCE_LABELS_ZH = {
     "alert_trigger_market_context": "告警触发上下文",
     "analysis_history_snapshot": "最近分析快照",
@@ -54,11 +56,13 @@ _MARKET_LABELS_ZH = {
     "cn": "A股",
     "hk": "港股",
     "us": "美股",
+    "tw": "台股",
 }
 _MARKET_LABELS_EN = {
     "cn": "A-shares",
     "hk": "Hong Kong",
     "us": "US",
+    "tw": "Taiwan",
 }
 _PHASE_LABELS_ZH = {
     "premarket": "盘前",
@@ -138,13 +142,13 @@ def rebuild_market_phase_summary_for_stock_code(
         return None
 
     market = get_market_for_stock(str(stock_code or "").strip())
-    if market not in {"jp", "kr"}:
+    if market not in {"jp", "kr", "tw"}:
         return dict(summary)
 
     phase = str(summary.get("phase", "")).strip()
-    analysis_phase = phase if phase in _ALLOWED_PHASES else "auto"
+    analysis_phase = phase if phase in _SUPPORTED_MANUAL_ANALYSIS_PHASES else "auto"
     analysis_intent = str(summary.get("analysis_intent") or "auto").strip()
-    if not analysis_intent:
+    if analysis_intent not in _SUPPORTED_ANALYSIS_INTENTS:
         analysis_intent = "auto"
 
     rebuilt = build_market_phase_context(
